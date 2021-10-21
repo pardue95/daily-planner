@@ -1,3 +1,4 @@
+// Puts date in header
 var getCurrentDate = function() {
     var todaysDate = moment().format('dddd, MMMM Do')
     console.log(todaysDate)
@@ -15,12 +16,12 @@ $(".hour-block").each(function() {
 
   
 };
-// store hour and text in local storage
-//retrieve hour and text from local storage
+
 getCurrentDate();
 
 // store hour and text in local storage
 var saveBtn = $(".saveBtn")
+// captures click to save text
 
 $(".saveBtn").click(function(){
     var hour = $(this).parent().attr("id")
@@ -30,10 +31,29 @@ $(".saveBtn").click(function(){
     localStorage.setItem(hour, text);
 })
 
+// Indicate whether it is past, present or future
+
+function pastPresentFuture () {
+    // check if index is equal to, less than , or greater than the current hour
+ var currentHour = moment().hour();
+//itereate thru hours bock to check index
+
+$(".hour-block").each(function (){
+//change ID to an integer
+var compareHour = parseInt($(this).attr("id"))
+ console.log(compareHour)
+    if (compareHour < currentHour) {
+        $(this).addClass("past")
+    } else if ( compareHour === currentHour) {
+        $(this).addClass("present")
+    } else {
+        $(this).addClass("future")
+    }
+})}
 
 
 
-
+pastPresentFuture()
 
 
 
